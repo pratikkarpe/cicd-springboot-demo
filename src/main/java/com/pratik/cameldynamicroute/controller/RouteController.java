@@ -14,6 +14,6 @@ public class RouteController {
 
     @GetMapping("/callRoute")
     public String callRoute(@RequestParam("url") String url) throws Exception {
-        return apiInvokeService.callAPI(url);
+        return apiInvokeService.callAPI(url); 
     }
 }
