@@ -24,17 +24,18 @@ public class ApiInvokeService {
     @Autowired
     ApiProperties apiProperties;
 
-    public void callAPI() throws Exception {
-        Map<String,String> requestHeaders = new HashMap<>();
-        requestHeaders.put("q","test");
-        String apiUrl = utils.buildUrl(apiProperties.getScheme(),apiProperties.getHost(), apiProperties.getPath(), requestHeaders);
+    public String callAPI(String url) throws Exception {
+        //Map<String,String> requestHeaders = new HashMap<>();
+        //requestHeaders.put("q","test");
+        //String apiUrl = utils.buildUrl(apiProperties.getScheme(),apiProperties.getHost(), apiProperties.getPath(), requestHeaders);
         Map<String,Object> exchangeHeaders = new HashMap<>();
-        exchangeHeaders.put("url",apiUrl);
+        exchangeHeaders.put("url",url);
         exchangeHeaders.put(Exchange.HTTP_METHOD, HttpMethods.GET);
         Exchange response = utils.callRoute(exchangeHeaders,null,"direct:api");
         validateResponse(response);
         String responseStr = response.getMessage().getBody(String.class);
         LOGGER.info("Response string is: {}",responseStr);
+        return responseStr;
     }
 
     public void validateResponse(Exchange response) throws Exception {

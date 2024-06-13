@@ -15,8 +15,6 @@ public class CameldynamicrouteApplication {
 
 	public static void main(String[] args) throws Exception {
 		ApplicationContext applicationContext = SpringApplication.run(CameldynamicrouteApplication.class, args);
-		ApiInvokeService apiInvokeService = (ApiInvokeService) applicationContext.getBean("apiInvokeService");
-		apiInvokeService.callAPI();
 	}
 
 }

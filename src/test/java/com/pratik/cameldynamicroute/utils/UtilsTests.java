@@ -49,7 +49,7 @@ public class UtilsTests {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:api").to("mock:test");
+                    from("direct:api2").to("mock:test").routeId("testId");
                 }
             };
         }
@@ -59,7 +59,7 @@ public class UtilsTests {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:apiTest").to("mock:test");
+                    from("direct:apiTest").to("mock:test").routeId("testId1");
                 }
             };
         }
@@ -71,21 +71,21 @@ public class UtilsTests {
         Map<String,Object> exchangeHeaders = new HashMap<>();
         exchangeHeaders.put("url","test.com");
         exchangeHeaders.put(Exchange.HTTP_METHOD, HttpMethods.GET);
-        u.callRoute(exchangeHeaders,null,"direct:api");
+        u.callRoute(exchangeHeaders,null,"direct:api2");
         mockEndpoint.message(0).header("url").isEqualTo("test.com");
         mockEndpoint.assertIsSatisfied();
     }
 
-//    @Test
+    @Test
     void callRouteTest_withBody() throws InterruptedException {
-//        Utils u = new Utils(camelContext,producerTemplate);
-//        Map<String,Object> exchangeHeaders = new HashMap<>();
-//        exchangeHeaders.put("url","test.com");
-//        exchangeHeaders.put(Exchange.HTTP_METHOD, HttpMethods.GET);
-//        u.callRoute(exchangeHeaders,"testBody","direct:apiTest");
-//        mockEndpoint.message(0).header("url").isEqualTo("test.com");
-//        mockEndpoint.message(0).body(String.class).isEqualTo("testBody");
-//        mockEndpoint.assertIsSatisfied();
+        Utils u = new Utils(camelContext,producerTemplate);
+        Map<String,Object> exchangeHeaders = new HashMap<>();
+        exchangeHeaders.put("url","test.com");
+        exchangeHeaders.put(Exchange.HTTP_METHOD, HttpMethods.GET);
+        u.callRoute(exchangeHeaders,"testBody","direct:apiTest");
+        mockEndpoint.message(0).header("url").isEqualTo("test.com");
+        mockEndpoint.message(0).body(String.class).isEqualTo("testBody");
+        mockEndpoint.assertIsSatisfied();
     }
 
     @Test
