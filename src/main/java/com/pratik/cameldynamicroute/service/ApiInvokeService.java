@@ -25,9 +25,6 @@ public class ApiInvokeService {
     ApiProperties apiProperties;
 
     public String callAPI(String url) throws Exception {
-        //Map<String,String> requestHeaders = new HashMap<>();
-        //requestHeaders.put("q","test");
-        //String apiUrl = utils.buildUrl(apiProperties.getScheme(),apiProperties.getHost(), apiProperties.getPath(), requestHeaders);
         Map<String,Object> exchangeHeaders = new HashMap<>();
         exchangeHeaders.put("url",url);
         exchangeHeaders.put(Exchange.HTTP_METHOD, HttpMethods.GET);
